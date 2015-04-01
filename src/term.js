@@ -2572,6 +2572,20 @@ Terminal.prototype.keyDown = function(ev) {
       break;
     default:
       // a-z and space
+      // Paste without caring about screenkeys
+      if (!this.prefixMode && ev.keyCode === 91) {
+        this.enterPrefix();
+        return;
+      }
+      if (this.prefixMode && ev.keyCode === 86) {
+        this.leavePrefix();
+        return;
+      }
+      // Copy without caring about screenkeys
+      if (this.prefixMode && ev.keyCode === 67) {
+        this.leavePrefix();
+        return;
+      }
       if (ev.ctrlKey) {
         if (ev.keyCode >= 65 && ev.keyCode <= 90) {
           // Ctrl-A
