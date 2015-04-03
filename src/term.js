@@ -2573,7 +2573,7 @@ Terminal.prototype.keyDown = function(ev) {
     default:
       // a-z and space
       // Paste without caring about screenkeys
-      if (!this.prefixMode && ev.keyCode === 91) {
+      if (!this.prefixMode && (ev.keyCode === 91 || ev.keyCode === 17)) {
         this.enterPrefix();
         return;
       }
