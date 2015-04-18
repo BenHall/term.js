@@ -284,8 +284,8 @@ Terminal.prototype.eraseAttr = function() {
 Terminal.tangoColors = [
   // dark:
   '#2e3436',
-  '#cc0000',
-  '#4e9a06',
+  '#C00',
+  '#7CFF00',
   '#c4a000',
   '#3465a4',
   '#75507b',
@@ -293,8 +293,8 @@ Terminal.tangoColors = [
   '#d3d7cf',
   // bright:
   '#555753',
-  '#ef2929',
-  '#8ae234',
+  '#C00',
+  '#7CFF00',
   '#fce94f',
   '#729fcf',
   '#ad7fa8',
@@ -305,8 +305,8 @@ Terminal.tangoColors = [
 Terminal.xtermColors = [
   // dark:
   '#000000', // black
-  '#cd0000', // red3
-  '#00cd00', // green3
+  '#C00', // red3
+  '#7CFF00', // green3
   '#cdcd00', // yellow3
   '#0000ee', // blue2
   '#cd00cd', // magenta3
@@ -314,8 +314,8 @@ Terminal.xtermColors = [
   '#e5e5e5', // gray90
   // bright:
   '#7f7f7f', // gray50
-  '#ff0000', // red
-  '#00ff00', // green
+  '#C00', // red
+  '#7CFF00', // green
   '#ffff00', // yellow
   '#5c5cff', // rgb:5c/5c/ff
   '#ff00ff', // magenta
