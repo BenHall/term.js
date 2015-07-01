@@ -286,17 +286,17 @@ Terminal.tangoColors = [
   '#2e3436',
   '#C00',
   '#7CFF00',
-  '#c4a000',
+  '#FFD000',
   '#3465a4',
   '#75507b',
-  '#06989a',
+  '#00FCFF',
   '#d3d7cf',
   // bright:
   '#555753',
   '#C00',
   '#7CFF00',
   '#fce94f',
-  '#729fcf',
+  '#8FC5FF',
   '#ad7fa8',
   '#34e2e2',
   '#eeeeec'
@@ -2575,18 +2575,15 @@ Terminal.prototype.keyDown = function(ev) {
       // Paste without caring about screenkeys
       if (!this.prefixMode && (ev.keyCode === 91 || ev.keyCode === 17)) {
         this.enterPrefix();
-        return;
       }
       if (this.prefixMode && ev.keyCode === 86) {
         this.leavePrefix();
-        return;
       }
       // Copy without caring about screenkeys
       if (this.prefixMode && ev.keyCode === 67) {
         this.leavePrefix();
-        return;
       }
-      if (ev.ctrlKey) {
+      if (ev.ctrlKey || this.prefixMode) {
         if (ev.keyCode >= 65 && ev.keyCode <= 90) {
           // Ctrl-A
           if (this.screenKeys) {
@@ -2598,15 +2595,6 @@ Terminal.prototype.keyDown = function(ev) {
           // Ctrl-V
           if (this.prefixMode && ev.keyCode === 86) {
             this.leavePrefix();
-            return;
-          }
-          // Ctrl-C
-          if ((this.prefixMode || this.selectMode) && ev.keyCode === 67) {
-            if (this.visualMode) {
-              setTimeout(function() {
-                self.leaveVisual();
-              }, 1);
-            }
             return;
           }
           key = String.fromCharCode(ev.keyCode - 64);
@@ -2640,11 +2628,6 @@ Terminal.prototype.keyDown = function(ev) {
 
   if (!key) return true;
 
-  if (this.prefixMode) {
-    this.leavePrefix();
-    return cancel(ev);
-  }
-
   if (this.selectMode) {
     this.keySelect(ev, key);
     return cancel(ev);
@@ -2656,7 +2639,10 @@ Terminal.prototype.keyDown = function(ev) {
   this.showCursor();
   this.handler(key);
 
-  return cancel(ev);
+  if(ev.keyCode === 8 || ev.keyCode === 13)
+    return cancel(ev);
+  else
+    return true;
 };
 
 Terminal.prototype.setgLevel = function(g) {
