@@ -2759,7 +2759,7 @@ Terminal.prototype.keyDown = function(ev) {
     default:
       // a-z and space
       // Paste without caring about screenkeys
-      if (!this.prefixMode && (ev.keyCode === 91 || ev.keyCode === 17)) {
+      if (!this.prefixMode && (ev.keyCode === 91 || (ev.keyCode >= 17 && ev.keyCode <= 18))) {
         this.enterPrefix();
       }
       if (this.prefixMode && ev.keyCode === 86) {
@@ -2787,6 +2787,10 @@ Terminal.prototype.keyDown = function(ev) {
         } else if (ev.keyCode === 32) {
           // NUL
           key = String.fromCharCode(0);
+        } else if (ev.keyCode === 51) {
+          // HACK: # on OSX
+          key = "#";
+          this.leavePrefix();
         } else if (ev.keyCode >= 51 && ev.keyCode <= 55) {
           // escape, file sep, group sep, record sep, unit sep
           key = String.fromCharCode(ev.keyCode - 51 + 27);
